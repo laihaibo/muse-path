@@ -24,10 +24,12 @@ export function SettingsSheet() {
 
   useEffect(() => {
     if (open) {
+      // 未保存过配置时，按默认/当前预设法预填 Base URL 与首个推荐模型
+      const fallback = getPreset(saved?.presetId ?? "deepseek");
       setPresetId(saved?.presetId ?? "deepseek");
-      setBaseUrl(saved?.baseUrl ?? "");
+      setBaseUrl(saved?.baseUrl ?? fallback.baseUrl);
       setApiKey(saved?.apiKey ?? "");
-      setModel(saved?.model ?? "");
+      setModel(saved?.model ?? (fallback.models[0] ?? ""));
       setTestResult(null);
       setShowKey(false);
     }

@@ -15,14 +15,14 @@ export const providerPresets: ProviderPreset[] = [
     id: "deepseek",
     name: "DeepSeek",
     baseUrl: "https://api.deepseek.com/v1",
-    models: ["deepseek-flash", "deepseek-v4-pro"],
+    models: ["deepseek-flash"],
     corsFriendly: true,
   },
   {
     id: "zhipu",
     name: "智谱 GLM",
     baseUrl: "https://open.bigmodel.cn/api/paas/v4",
-    models: ["glm-5.3", "glm-5.3-flashx", "glm-5.3-flash"],
+    models: ["glm-5.3-flash"],
     corsFriendly: true,
   },
   {
