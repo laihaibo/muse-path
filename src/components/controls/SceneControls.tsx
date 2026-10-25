@@ -73,6 +73,11 @@ export function PoiInfoCard() {
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <span className="truncate text-sm font-semibold">{poi.name}</span>
+                {poi.mustSee && (
+                  <span className="shrink-0 rounded-full bg-amber-400/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-200">
+                    ⭐ 必看
+                  </span>
+                )}
                 <span className="shrink-0 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-slate-300">
                   {poi.category}
                 </span>

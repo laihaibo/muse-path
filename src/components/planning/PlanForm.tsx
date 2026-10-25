@@ -61,6 +61,9 @@ export function PlanForm() {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
 
+  const mustSeeList = project.venue.pois.filter((p) => p.mustSee && p.kind === "exhibit");
+  const hallName = (hallId?: string) => project.venue.halls.find((h) => h.id === hallId)?.name ?? "中央广场";
+
   return (
     <div className="flex flex-col gap-5">
       <div className="rounded-2xl bg-white/5 p-3.5 ring-1 ring-white/10">
@@ -70,6 +73,50 @@ export function PlanForm() {
           {project.dates} · {project.dataNote}
         </div>
       </div>
+
+      {(project.highlights?.length || mustSeeList.length > 0 || project.gifts?.length) ? (
+        <div className="rounded-2xl bg-white/5 p-3.5 ring-1 ring-white/10">
+          {project.highlights && project.highlights.length > 0 && (
+            <div className="mb-3">
+              <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-cyan-200">✨ 本届亮点</div>
+              <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-slate-300">
+                {project.highlights.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {mustSeeList.length > 0 && (
+            <div className="mb-3">
+              <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-amber-200">⭐ 必看推荐</div>
+              <ul className="space-y-1 text-xs leading-relaxed text-slate-300">
+                {mustSeeList.map((p) => (
+                  <li key={p.id}>
+                    <button
+                      type="button"
+                      className="text-left font-medium hover:text-cyan-200"
+                      onClick={() => useAppStore.getState().selectPoi(p.id)}
+                    >
+                      {p.name}
+                    </button>
+                    <span className="text-slate-500"> · {hallName(p.hallId)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {project.gifts && project.gifts.length > 0 && (
+            <div>
+              <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-violet-200">🎁 现场福利（以官方当日为准）</div>
+              <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-slate-300">
+                {project.gifts.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      ) : null}
 
       <div>
         <SectionTitle>兴趣标签（可多选，不选则由 AI 安排）</SectionTitle>

@@ -119,7 +119,14 @@ export function ItineraryList({ route }: { route: ComputedRoute | null }) {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-2">
                         <span className="truncate text-sm font-semibold">{poi.name}</span>
-                        <span className="shrink-0 text-[11px] text-slate-400">{stop.plannedMinutes} 分钟</span>
+                        <span className="flex shrink-0 items-center gap-1.5">
+                          {poi.mustSee && (
+                            <span className="rounded-full bg-amber-400/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-200">
+                              ⭐ 必看
+                            </span>
+                          )}
+                          <span className="text-[11px] text-slate-400">{stop.plannedMinutes} 分钟</span>
+                        </span>
                       </div>
                       <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-slate-500">
                         {poi.hallId && <span className="truncate">{hallName(poi.hallId)}</span>}

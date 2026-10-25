@@ -52,6 +52,8 @@ export interface POI {
   nearWaypoint: string;
   /** 服务设施（休息/咖啡等，AI 可插入行程但通常不作为兴趣点） */
   kind: "exhibit" | "service";
+  /** 官方/媒体重点推荐的必看点，行程与信息卡中会加标记 */
+  mustSee?: boolean;
 }
 
 export interface Venue {
@@ -73,5 +75,9 @@ export interface VenueProject {
   categories: string[];
   /** 数据说明，UI 上明示（如“示意数据”） */
   dataNote: string;
+  /** 本届亮点（来自公开报道） */
+  highlights?: string[];
+  /** 现场福利/值得拿的礼品（以官方当日为准） */
+  gifts?: string[];
   venue: Venue;
 }

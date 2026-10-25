@@ -275,6 +275,14 @@ html.light .bg-black\/55 {
   background-color: rgba(12, 20, 36, 0.4);
 }
 
+/* Segmented 选中胶囊：浅色轨道上白底需投影衬托才明显 */
+html.light .bg-white\/90 {
+  background-color: #ffffff;
+  box-shadow:
+    0 1px 3px rgba(16, 27, 48, 0.28),
+    0 5px 16px rgba(16, 27, 48, 0.16);
+}
+
 /* 青色强调（浅底需加深） */
 html.light .text-cyan-100,
 html.light .text-cyan-300 {

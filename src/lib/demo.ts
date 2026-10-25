@@ -40,24 +40,19 @@ function greedyDemo(project: VenueProject, entryId: string): PlanStop[] {
 
 const ningboCurated = (entryId: string): PlanStop[] => {
   const stops: PlanStop[] = [
-    { poiId: "p-robo-bus", reason: "人气王项目，先取号排队，等待期间正好逛旁边的车路云沙盘。", plannedMinutes: 15 },
-    { poiId: "p-v2x", reason: "排队小巴时顺路观看，1:50 微缩城区很出片。", plannedMinutes: 8 },
-    { poiId: "p-cabin", reason: "三号馆尽头环幕座舱，无人驾驶体验的补充。", plannedMinutes: 12 },
-    { poiId: "p-drone-swarm", reason: "北上二号馆看物流无人机编队调度，低空经济入门首选。", plannedMinutes: 10 },
-    { poiId: "p-evtol", reason: "可进舱的 eVTOL 真机，本次展会打卡度最高的展项之一。", plannedMinutes: 15 },
-    { poiId: "p-quadruped", reason: "一号馆障碍赛整点开场，卡点观看效率最高。", plannedMinutes: 10 },
-    { poiId: "p-robot-show", reason: "全尺寸人形机器人整机秀，本届智博会的招牌。", plannedMinutes: 15 },
-    { poiId: "s-coffee", reason: "看完重头戏，在轴通道中段咖啡区休整 20 分钟。", plannedMinutes: 20 },
-    { poiId: "p-installation", reason: "收尾到北端中庭，30 米光影装置前拍完打卡照离场。", plannedMinutes: 6 },
+    { poiId: "p-installation", reason: "南门进馆第一眼就是中央广场主题装置，先打卡再出发。", plannedMinutes: 6 },
+    { poiId: "p-hrg", reason: "本届招牌「人机共生」展区，机器人全链条能力一次看全。", plannedMinutes: 15 },
+    { poiId: "p-huawei", reason: "同馆顺路，大模型与算力底座值得停留。", plannedMinutes: 12 },
+    { poiId: "p-embodied-factory", reason: "「具身智能进工厂」首次亮相，看人形机器人上产线。", plannedMinutes: 15 },
+    { poiId: "p-parts", reason: "零部件「爆炸图」出片又硬核，舜宇/均胜等宁波制造底牌。", plannedMinutes: 12 },
+    { poiId: "p-experience", reason: "50 余家智能产品沉浸体验，逛累了也能坐着玩。", plannedMinutes: 15 },
+    { poiId: "p-zhiyuan", reason: "智元/火花机器人整机互动，适合收尾前放松。", plannedMinutes: 12 },
+    { poiId: "p-security", reason: "北端智慧城市馆的大疆无人机安防实景，离北门近。", plannedMinutes: 12 },
+    { poiId: "s-coffee", reason: "中央广场咖啡区休整 20 分钟再战下半场。", plannedMinutes: 20 },
   ];
-  // 从东侧入口进入时按东馆优先微调说明（顺序仍由 2-opt 决定）
-  if (entryId === "east") {
-    stops[0] = { poiId: "p-lighthouse", reason: "东入口进门就是五号馆，先看灯塔工厂黑灯产线。", plannedMinutes: 10 };
-    stops.splice(1, 2, {
-      poiId: "p-llm",
-      reason: "四号馆多模态大模型开放日，现场对话体验旗舰模型。",
-      plannedMinutes: 12,
-    });
+  // 从北门进入时先逛智慧城市馆（出门即达）
+  if (entryId === "north") {
+    stops.unshift({ poiId: "p-security", reason: "北门进馆就是智慧城市馆，先看无人机安防实景。", plannedMinutes: 12 });
   }
   return stops;
 };
@@ -70,7 +65,7 @@ export function demoPlan(project: VenueProject, entryId: string): VisitPlanData 
     summary:
       "未接入 AI 时的内置演示路线：覆盖人气最高的展项并按顺路方向排列。在设置页配置 API Key 后，即可按你的兴趣生成专属路线。",
     stops: orderStops(project.venue, entryId, stops),
-    tips: ["演示数据仅供展示，展项与布局为示意内容。"],
+    tips: ["展商与展区信息来自公开报道，展位坐标为示意布局，福利以现场为准。"],
     source: "demo",
     generatedAt: Date.now(),
   };
