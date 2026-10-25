@@ -6,11 +6,14 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { Line2, LineMaterial } from "three-stdlib";
 import type { ComputedRoute } from "@/lib/pathfinding/route";
+import { useResolvedTheme } from "@/lib/theme";
 
 const PATH_Y = 0.75;
 
 export function PathLine({ route }: { route: ComputedRoute }) {
   const coreRef = useRef<Line2 | null>(null);
+  const dark = useResolvedTheme() === "dark";
+  const coreColor = dark ? "#67e8f9" : "#0e7490";
 
   const points = useMemo(
     () => route.pathPoints.map(([x, z]) => new THREE.Vector3(x, PATH_Y, z)),
@@ -32,7 +35,7 @@ export function PathLine({ route }: { route: ComputedRoute }) {
       <Line
         ref={coreRef}
         points={points}
-        color="#67e8f9"
+        color={coreColor}
         lineWidth={2.6}
         dashed
         dashSize={5}
@@ -56,6 +59,7 @@ export function Walker({
   const meshRef = useRef<THREE.Group>(null);
   const tRef = useRef(0);
   const lenRef = useRef(0);
+  const dark = useResolvedTheme() === "dark";
 
   useEffect(() => {
     lenRef.current = curve.getLength();
@@ -80,7 +84,7 @@ export function Walker({
     <group ref={meshRef}>
       <mesh>
         <sphereGeometry args={[1.7, 24, 24]} />
-        <meshBasicMaterial color="#9be8ff" />
+        <meshBasicMaterial color={dark ? "#9be8ff" : "#0ea5e9"} />
       </mesh>
       <mesh scale={1.9}>
         <sphereGeometry args={[1.7, 24, 24]} />

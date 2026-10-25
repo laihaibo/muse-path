@@ -9,12 +9,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#070b16",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#e3ebf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#070b16" },
+  ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   viewportFit: "cover",
 };
+
+/** 首帧前应用主题，避免日间/夜间闪屏；与 src/lib/theme.ts 读写同一 localStorage 键 */
+const themeInitScript = `(function(){try{var t=localStorage.getItem("musepath-theme");if(t!=="light"&&t!=="dark")t="system";var l=t==="light"||(t==="system"&&window.matchMedia("(prefers-color-scheme: light)").matches);var d=document.documentElement;d.classList.toggle("light",l);d.classList.toggle("dark",!l);d.style.colorScheme=l?"light":"dark";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",l?"#e3ebf7":"#070b16")}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -22,8 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="zh-CN" className="dark" suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {children}
+      </body>
     </html>
   );
 }

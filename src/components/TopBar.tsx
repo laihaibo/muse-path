@@ -4,7 +4,31 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { projects } from "@/data/venues";
 import { useAppStore } from "@/lib/store";
-import { IconChat, IconCheck, IconChevronDown, IconGear } from "./icons";
+import { getThemeMode, setThemeMode, useResolvedTheme, type ThemeMode } from "@/lib/theme";
+import { IconChat, IconCheck, IconChevronDown, IconGear, IconMonitor, IconMoon, IconSun } from "./icons";
+
+const THEME_ORDER: ThemeMode[] = ["system", "light", "dark"];
+
+function ThemeToggle() {
+  const resolved = useResolvedTheme();
+  const mode = getThemeMode();
+  const Icon = mode === "system" ? IconMonitor : resolved === "light" ? IconSun : IconMoon;
+  const label = mode === "system" ? "主题：跟随系统" : mode === "light" ? "主题：日间" : "主题：夜间";
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={() => {
+        const next = THEME_ORDER[(THEME_ORDER.indexOf(getThemeMode()) + 1) % THEME_ORDER.length];
+        setThemeMode(next);
+      }}
+      className="glass-chip flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/15"
+    >
+      <Icon className="h-[18px] w-[18px]" />
+    </button>
+  );
+}
 
 export function LogoMark() {
   return (
@@ -124,6 +148,7 @@ export function TopBar() {
       </div>
 
       <div className="pointer-events-auto flex items-center gap-2">
+        <ThemeToggle />
         <button
           type="button"
           aria-label="AI 助手"

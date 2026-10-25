@@ -5,6 +5,7 @@ import { useEffect, useMemo } from "react";
 import { getProject, projects } from "@/data/venues";
 import { computeRoute } from "@/lib/pathfinding/route";
 import { rehydrateStore, useAppStore, type MobileTab } from "@/lib/store";
+import { initTheme } from "@/lib/theme";
 import { Segmented } from "./Glass";
 import { IconChat, IconMapPin, IconRoute } from "./icons";
 import { PlanChat } from "./chat/PlanChat";
@@ -18,6 +19,7 @@ import VenueScene from "./three/VenueScene";
 export default function AppShell() {
   useEffect(() => {
     rehydrateStore();
+    return initTheme();
   }, []);
 
   const selectedProjectId = useAppStore((s) => s.selectedProjectId);

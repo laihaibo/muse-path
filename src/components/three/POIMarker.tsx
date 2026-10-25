@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import type { POI } from "@/data/venues/schema";
 import { useAppStore } from "@/lib/store";
+import { useResolvedTheme } from "@/lib/theme";
 
 const SERVICE_COLOR = "#f5b04c";
 
@@ -19,6 +20,7 @@ export function POIMarker({ poi }: { poi: POI }) {
     if (!plan) return -1;
     return plan.stops.findIndex((st) => st.poiId === poi.id);
   });
+  const dark = useResolvedTheme() === "dark";
 
   const [pulse, setPulse] = useState(0);
   const ringRef = useRef<THREE.Mesh>(null);
@@ -31,7 +33,7 @@ export function POIMarker({ poi }: { poi: POI }) {
   });
 
   const planned = plannedIndex >= 0;
-  const color = planned ? "#22d3ee" : poi.kind === "service" ? SERVICE_COLOR : "#9fb2cc";
+  const color = planned ? "#22d3ee" : poi.kind === "service" ? SERVICE_COLOR : dark ? "#9fb2cc" : "#64748b";
   const showLabel = selected || hovered || planned;
 
   return (
@@ -77,8 +79,12 @@ export function POIMarker({ poi }: { poi: POI }) {
           <div
             className="poi-chip"
             style={{
-              background: planned ? "rgba(8,40,48,0.85)" : "rgba(10,16,30,0.85)",
-              borderColor: planned ? "#22d3ee88" : "rgba(255,255,255,0.2)",
+              background: dark
+                ? planned
+                  ? "rgba(8,40,48,0.85)"
+                  : "rgba(10,16,30,0.85)"
+                : "rgba(255,255,255,0.92)",
+              borderColor: planned ? "#22d3ee88" : dark ? "rgba(255,255,255,0.2)" : "rgba(16,27,48,0.18)",
             }}
           >
             {planned && <span className="poi-chip-num">{plannedIndex + 1}</span>}

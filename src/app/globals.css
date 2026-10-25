@@ -176,3 +176,228 @@ body {
 *::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ---------- 日间主题（html.light，由 theme.ts / layout 内联脚本切换） ----------
+   现有组件统一使用暗色工具类，这里在 light 模式下集中重映射同一批类，避免逐组件改造 */
+
+html.light body {
+  background: #e3ebf7;
+  color: #101b30;
+}
+
+html.light .bg-\[\#070b16\] {
+  background-color: #e3ebf7;
+}
+
+/* 文字 */
+html.light .text-slate-100 {
+  color: #101b30;
+}
+html.light .text-slate-200 {
+  color: #1b2941;
+}
+html.light .text-slate-300,
+html.light .hover\:text-slate-300:hover {
+  color: #33425e;
+}
+html.light .text-slate-400 {
+  color: #5a6b88;
+}
+html.light .text-slate-500 {
+  color: #7d8ca7;
+}
+html.light .text-white,
+html.light .hover\:text-white:hover {
+  color: #101b30;
+}
+html.light .placeholder\:text-slate-500::placeholder {
+  color: #7d8ca7;
+}
+
+/* 中性面板（白 → 半透明墨蓝） */
+html.light .bg-white\/4 {
+  background-color: rgba(16, 27, 48, 0.04);
+}
+html.light .bg-white\/5 {
+  background-color: rgba(16, 27, 48, 0.05);
+}
+html.light .bg-white\/6 {
+  background-color: rgba(16, 27, 48, 0.05);
+}
+html.light .bg-white\/8 {
+  background-color: rgba(16, 27, 48, 0.07);
+}
+html.light .bg-white\/10,
+html.light .focus\:bg-white\/10:focus {
+  background-color: rgba(16, 27, 48, 0.08);
+}
+html.light .bg-white\/12 {
+  background-color: rgba(16, 27, 48, 0.1);
+}
+html.light .bg-white\/15,
+html.light .hover\:bg-white\/15:hover {
+  background-color: rgba(16, 27, 48, 0.12);
+}
+html.light .hover\:bg-white\/10:hover {
+  background-color: rgba(16, 27, 48, 0.08);
+}
+html.light .hover\:bg-white\/12:hover {
+  background-color: rgba(16, 27, 48, 0.1);
+}
+html.light .border-white\/10 {
+  border-color: rgba(16, 27, 48, 0.1);
+}
+html.light .border-white\/12 {
+  border-color: rgba(16, 27, 48, 0.12);
+}
+html.light .border-white\/14 {
+  border-color: rgba(16, 27, 48, 0.14);
+}
+html.light .border-white\/15 {
+  border-color: rgba(16, 27, 48, 0.15);
+}
+html.light .border-white\/16 {
+  border-color: rgba(16, 27, 48, 0.16);
+}
+html.light .ring-white\/10 {
+  --tw-ring-color: rgba(16, 27, 48, 0.1);
+}
+html.light .ring-white\/12 {
+  --tw-ring-color: rgba(16, 27, 48, 0.12);
+}
+html.light .ring-white\/15 {
+  --tw-ring-color: rgba(16, 27, 48, 0.15);
+}
+html.light .ring-white\/16 {
+  --tw-ring-color: rgba(16, 27, 48, 0.16);
+}
+html.light .bg-black\/55 {
+  background-color: rgba(12, 20, 36, 0.4);
+}
+
+/* 青色强调（浅底需加深） */
+html.light .text-cyan-100,
+html.light .text-cyan-300 {
+  color: #0e7490;
+}
+html.light .text-cyan-200 {
+  color: #0891b2;
+}
+html.light .bg-cyan-400\/15 {
+  background-color: rgba(8, 145, 178, 0.13);
+}
+html.light .bg-cyan-400\/20 {
+  background-color: rgba(8, 145, 178, 0.16);
+}
+html.light .bg-cyan-400\/25 {
+  background-color: rgba(8, 145, 178, 0.2);
+}
+html.light .border-cyan-300\/30 {
+  border-color: rgba(8, 145, 178, 0.35);
+}
+html.light .border-cyan-300\/40,
+html.light .focus\:border-cyan-300\/40:focus {
+  border-color: rgba(8, 145, 178, 0.4);
+}
+html.light .border-cyan-300\/50 {
+  border-color: rgba(8, 145, 178, 0.5);
+}
+html.light .hover\:ring-cyan-300\/25:hover {
+  --tw-ring-color: rgba(8, 145, 178, 0.35);
+}
+
+/* 语义色 */
+html.light .text-rose-200,
+html.light .text-rose-300,
+html.light .hover\:text-rose-300:hover {
+  color: #be123c;
+}
+html.light .bg-rose-500\/10 {
+  background-color: rgba(190, 18, 60, 0.08);
+}
+html.light .hover\:bg-rose-500\/20:hover,
+html.light .hover\:bg-rose-500\/25:hover {
+  background-color: rgba(190, 18, 60, 0.12);
+}
+html.light .border-rose-400\/25,
+html.light .border-rose-400\/30 {
+  border-color: rgba(190, 18, 60, 0.35);
+}
+html.light .text-amber-200 {
+  color: #92400e;
+}
+html.light .bg-amber-400\/15,
+html.light .bg-amber-400\/20 {
+  background-color: rgba(146, 64, 14, 0.1);
+}
+html.light .border-amber-300\/30 {
+  border-color: rgba(146, 64, 14, 0.35);
+}
+html.light .text-violet-200 {
+  color: #5b21b6;
+}
+html.light .bg-violet-400\/15 {
+  background-color: rgba(91, 33, 182, 0.1);
+}
+html.light .border-violet-300\/30 {
+  border-color: rgba(91, 33, 182, 0.35);
+}
+html.light .text-emerald-200 {
+  color: #047857;
+}
+html.light .bg-emerald-500\/10 {
+  background-color: rgba(4, 120, 87, 0.08);
+}
+html.light .border-emerald-400\/30 {
+  border-color: rgba(4, 120, 87, 0.35);
+}
+
+/* 玻璃拟态（保留基类的 backdrop-filter，仅替换表面与阴影） */
+html.light .glass {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.62) 42%, rgba(224, 234, 250, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 24px 70px rgba(15, 23, 42, 0.12);
+}
+html.light .glass-strong {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(238, 244, 253, 0.96));
+  border: 1px solid rgba(16, 27, 48, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 30px 90px rgba(15, 23, 42, 0.16);
+}
+html.light .glass-chip {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.6));
+  border: 1px solid rgba(16, 27, 48, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* 3D 标注（场景在日间为浅色，标注随之切换） */
+html.light .hall-label {
+  color: #1b2941;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.7);
+  border-color: rgba(16, 27, 48, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+}
+html.light .poi-chip {
+  color: #1b2941;
+  text-shadow: none;
+}
+html.light .poi-chip-min {
+  color: #5a6b88;
+}
+html.light .entrance-label {
+  color: #33425e;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.8);
+}
+
+/* 滚动条 */
+html.light * {
+  scrollbar-color: rgba(16, 27, 48, 0.22) transparent;
+}
+html.light *::-webkit-scrollbar-thumb {
+  background: rgba(16, 27, 48, 0.22);
+}

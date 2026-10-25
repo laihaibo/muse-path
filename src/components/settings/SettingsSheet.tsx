@@ -151,8 +151,7 @@ export function SettingsSheet() {
                 className="w-full rounded-xl border border-white/12 bg-white/8 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-colors focus:border-cyan-300/40"
               />
               <p className="mt-1.5 text-[11px] text-slate-500">
-                请求由浏览器直连，需服务商允许跨域（CORS）。DeepSeek / 智谱 / Kimi / OpenAI / OpenRouter /
-                硅基流动均已验证可直连。
+                请求由浏览器直连，需服务商允许跨域（CORS）。DeepSeek / 智谱均已验证可直连。
               </p>
             </div>
 
