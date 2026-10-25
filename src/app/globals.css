@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "PingFang SC",
+    "HarmonyOS Sans SC", "Microsoft YaHei UI", "Noto Sans SC", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #070b16;
+  color: #f1f5ff;
+  overscroll-behavior: none;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+}
+
+/* ---------- Liquid Glass ---------- */
+
+.glass {
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.045) 42%,
+    rgba(125, 170, 255, 0.07)
+  );
+  -webkit-backdrop-filter: blur(28px) saturate(1.7);
+  backdrop-filter: blur(28px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 70px rgba(2, 6, 18, 0.55);
+}
+
+.glass-strong {
+  background: linear-gradient(150deg, rgba(30, 41, 66, 0.88), rgba(13, 20, 38, 0.92));
+  -webkit-backdrop-filter: blur(36px) saturate(1.8);
+  backdrop-filter: blur(36px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 30px 90px rgba(1, 4, 14, 0.7);
+}
+
+.glass-chip {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 10px 30px rgba(2, 6, 18, 0.4);
+}
+
+/* ---------- 3D 标注（drei Html） ---------- */
+
+.hall-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(226, 236, 255, 0.85);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 13, 26, 0.55);
+  border-radius: 999px;
+  padding: 4px 10px;
+  user-select: none;
+}
+
+.hall-label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.poi-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 4px 10px;
+  border: 1px solid;
+  font-size: 12px;
+  color: #eef4ff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  user-select: none;
+}
+
+.poi-chip-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #22d3ee;
+  color: #04141c;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.poi-chip-min {
+  color: rgba(203, 220, 245, 0.65);
+  font-size: 10px;
+}
+
+.entrance-label {
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(226, 236, 255, 0.7);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  user-select: none;
+}
+
+/* ---------- 表单细节 ---------- */
+
+.muse-range {
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22d3ee, #818cf8);
+  outline: none;
+}
+
+.muse-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid #22d3ee;
+  box-shadow: 0 2px 12px rgba(34, 211, 238, 0.5);
+  cursor: pointer;
+}
+
+.muse-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid #22d3ee;
+  cursor: pointer;
+}
+
+/* ---------- 滚动条 ---------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
