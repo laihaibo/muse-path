@@ -62,7 +62,16 @@ export function PlanForm() {
   const mins = minutes % 60;
 
   const mustSeeList = project.venue.pois.filter((p) => p.mustSee && p.kind === "exhibit");
-  const hallName = (hallId?: string) => project.venue.halls.find((h) => h.id === hallId)?.name ?? "中央广场";
+  const hallName = (hallId?: string) => project.venue.halls.find((h) => h.id === hallId)?.name ?? "公共区域";
+
+  const eventStyle: Record<string, { title: string; className: string }> = {
+    exhibition: { title: "🎪", className: "text-cyan-200" },
+    activity: { title: "🎉", className: "text-violet-200" },
+    season: { title: "🍂", className: "text-amber-200" },
+  };
+
+  const hasEventCard =
+    project.events?.length || project.highlights?.length || mustSeeList.length > 0 || project.gifts?.length;
 
   return (
     <div className="flex flex-col gap-5">
@@ -74,8 +83,25 @@ export function PlanForm() {
         </div>
       </div>
 
-      {(project.highlights?.length || mustSeeList.length > 0 || project.gifts?.length) ? (
+      {hasEventCard ? (
         <div className="rounded-2xl bg-white/5 p-3.5 ring-1 ring-white/10">
+          {project.events && project.events.length > 0 && (
+            <div className="mb-3">
+              <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-emerald-200">🍂 当季展会与活动（以园方公告为准）</div>
+              <ul className="space-y-1.5 text-xs leading-relaxed text-slate-300">
+                {project.events.map((e) => {
+                  const style = eventStyle[e.kind] ?? eventStyle.exhibition;
+                  return (
+                    <li key={e.id}>
+                      <span className={`font-medium ${style.className}`}>{style.title} {e.name}</span>
+                      <span className="text-slate-500"> · {e.period}{e.area ? ` · ${e.area}` : ""}</span>
+                      <div className="text-slate-400">{e.description}</div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
           {project.highlights && project.highlights.length > 0 && (
             <div className="mb-3">
               <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-cyan-200">✨ 本届亮点</div>

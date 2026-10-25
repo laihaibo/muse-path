@@ -79,5 +79,22 @@ export interface VenueProject {
   highlights?: string[];
   /** 现场福利/值得拿的礼品（以官方当日为准） */
   gifts?: string[];
+  /** 当前时令一句话概述（常年开放场馆用，如花讯/红叶季） */
+  seasonNote?: string;
+  /** 当前进行中的展会/活动/时令看点（供表单展示与 AI 提示） */
+  events?: VenueEvent[];
+  /** 3D 场景视野缩放：场地比默认（±400m 级）更大时调高，相机高度/雾效/可拉远距离随其等比放大，默认 1 */
+  sceneZoom?: number;
   venue: Venue;
+}
+
+export interface VenueEvent {
+  id: string;
+  name: string;
+  /** 档期文案，如“10月底 – 12月初” */
+  period: string;
+  /** 所在区域/场馆名（自由文本，对应 halls/pois 名称） */
+  area?: string;
+  description: string;
+  kind: "exhibition" | "activity" | "season";
 }

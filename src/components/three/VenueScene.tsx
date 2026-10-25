@@ -71,6 +71,7 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
   const playing = useAppStore((s) => s.playing);
   const theme = useResolvedTheme();
   const C = SCENE[theme];
+  const zoom = project.sceneZoom ?? 1;
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const walkerRef = useRef(new THREE.Vector3(0, 0, 95));
 
@@ -83,11 +84,11 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
   return (
     <>
       <color attach="background" args={[C.bg]} />
-      <fog attach="fog" args={[C.bg, 340, 950]} />
+      <fog attach="fog" args={[C.bg, 340 * zoom, 950 * zoom]} />
       <ambientLight intensity={C.ambient} />
       <hemisphereLight args={[C.hemi[0], C.hemi[1], C.hemi[2]]} />
       <directionalLight position={[140, 200, 90]} intensity={1.15} />
-      {C.stars && <Stars radius={520} depth={60} count={1600} factor={5} saturation={0} fade speed={0.5} />}
+      {C.stars && <Stars radius={520 * zoom} depth={60} count={1600} factor={5} saturation={0} fade speed={0.5} />}
 
       {/* 地面 */}
       <mesh rotation-x={-Math.PI / 2} position-y={-0.08}>
@@ -103,7 +104,7 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
         sectionSize={50}
         sectionThickness={1.1}
         sectionColor={C.section}
-        fadeDistance={560}
+        fadeDistance={560 * zoom}
         fadeStrength={1.4}
         infiniteGrid={false}
       />
@@ -125,7 +126,7 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
 
       {curve && <PathLine route={route!} />}
       {curve && <Walker curve={curve} playing={playing} walkerRef={walkerRef} />}
-      <CameraRig mode={cameraMode} walkerRef={walkerRef} hasRoute={!!curve} controlsRef={controlsRef} />
+      <CameraRig mode={cameraMode} walkerRef={walkerRef} hasRoute={!!curve} controlsRef={controlsRef} zoom={zoom} />
 
       <OrbitControls
         ref={controlsRef}
@@ -134,7 +135,7 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
         enableDamping
         dampingFactor={0.08}
         minDistance={30}
-        maxDistance={700}
+        maxDistance={700 * zoom}
         maxPolarAngle={1.42}
       />
     </>
@@ -142,10 +143,11 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
 }
 
 export default function VenueScene({ project, route }: { project: VenueProject; route: ComputedRoute | null }) {
+  const zoom = project.sceneZoom ?? 1;
   return (
     <div className="absolute inset-0" aria-label="3D 场馆视图">
       <Canvas
-        camera={{ position: [215, 185, 285], fov: 40, near: 0.5, far: 2200 }}
+        camera={{ position: [215 * zoom, 185 * zoom, 285 * zoom], fov: 40, near: 0.5, far: 2200 * zoom }}
         dpr={[1, 2]}
         gl={{ antialias: true }}
         onPointerMissed={() => useAppStore.getState().selectPoi(null)}

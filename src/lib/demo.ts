@@ -57,15 +57,45 @@ const ningboCurated = (entryId: string): PlanStop[] => {
   return stops;
 };
 
+/** 宁波植物园深秋精选路线（2026.10 时令快照） */
+const gardenCurated = (entryId: string): PlanStop[] => {
+  const stops: PlanStop[] = [
+    { poiId: "p-gw-rainforest", reason: "一号门进园即达展览温室，雾森雨林是全园人气王，先趁体力充沛逛透。", plannedMinutes: 40 },
+    { poiId: "p-orchid-show", reason: "温室广场上的十周年热带兰展顺路打卡，花色正艳。", plannedMinutes: 20 },
+    { poiId: "p-gw-carnivorous", reason: "食虫植物馆就在温室北侧，捕蝇草最适合带娃围观。", plannedMinutes: 20 },
+    { poiId: "p-chrysanth-show", reason: "兰园菊展主展区沿主轴东侧，深秋花事当前非看不可。", plannedMinutes: 35 },
+    { poiId: "p-evolution-road", reason: "走一段「植物进化之路」科普长廊，顺势过渡到环湖段。", plannedMinutes: 20 },
+    { poiId: "p-boat-pier", reason: "中心湖游船码头登船，水上视角看两湖秋色省脚力。", plannedMinutes: 30 },
+    { poiId: "s-teahouse", reason: "湖畔茶座歇脚补 水，再看一眼湖上落羽杉。", plannedMinutes: 20 },
+    { poiId: "p-aquatic-forest", reason: "水上森林栈道是深秋限定，落羽杉正在转色。", plannedMinutes: 30 },
+    { poiId: "p-maple-autumn", reason: "槭树秋香园收尾，下午 3–5 点逆光拍秋枫最出片。", plannedMinutes: 30 },
+  ];
+  // 三号门（北侧）进入时，先游北岸秋色再南下温室
+  if (entryId === "gate-3") {
+    stops.unshift({ poiId: "p-maple-autumn", reason: "三号门进园先抵槭树秋香园，出门即秋枫红叶。", plannedMinutes: 30 });
+  }
+  return stops;
+};
+
+/** 按项目定制的演示路线；未定制的场馆走最近邻贪心 */
+const curatedByProject: Record<string, (entryId: string) => PlanStop[]> = {
+  "ningbo-smart-expo-2026": ningboCurated,
+  "ningbo-botanical-garden": gardenCurated,
+};
+
 export function demoPlan(project: VenueProject, entryId: string): VisitPlanData {
-  const isNingbo = project.id === "ningbo-smart-expo-2026";
-  const stops = isNingbo ? ningboCurated(entryId) : greedyDemo(project, entryId);
+  const curated = curatedByProject[project.id];
+  const stops = curated ? curated(entryId) : greedyDemo(project, entryId);
   return {
-    title: "智博会精选半日游（演示）",
+    title: `${project.name}精选半日游（演示）`,
     summary:
-      "未接入 AI 时的内置演示路线：覆盖人气最高的展项并按顺路方向排列。在设置页配置 API Key 后，即可按你的兴趣生成专属路线。",
+      "未接入 AI 时的内置演示路线：覆盖当前时令人气最高的展项并按顺路方向排列。在设置页配置 API Key 后，即可按你的兴趣生成专属路线。",
     stops: orderStops(project.venue, entryId, stops),
-    tips: ["展商与展区信息来自公开报道，展位坐标为示意布局，福利以现场为准。"],
+    tips: [
+      project.id === "ningbo-botanical-garden"
+        ? "园区/专类园/出入口为真实名称，坐标为示意还原；花讯与活动信息截至 2026.10，以园方当日公告为准。"
+        : "展商与展区信息来自公开报道，展位坐标为示意布局，福利以现场为准。",
+    ],
     source: "demo",
     generatedAt: Date.now(),
   };

@@ -1,8 +1,8 @@
 # MusePath · AI 观展路径规划
 
-为展会、博览会与博物馆生成**专属观展路线**：AI 按你的兴趣挑选展项并排序，A\* 算法在 3D 场馆路网上算出可行走路径，并支持跟随镜头漫游整条路线。
+为展会、博览会、博物馆与园区生成**专属游览路线**：AI 按你的兴趣挑选展项并排序，A\* 算法在 3D 场馆路网上算出可行走路径，并支持跟随镜头漫游整条路线。
 
-内置示例：**2026 智博会 · 宁波国际会展中心**（程序化 3D 建模，示意数据）。
+内置示例：**2026 智博会 · 宁波国际会展中心**（程序化 3D 建模，示意数据）、**宁波植物园**（真实专类园/出入口/展览温室 + 时令花事与展会活动，坐标示意还原）。
 
 ![tech](https://img.shields.io/badge/Next.js-15-black) ![tech](https://img.shields.io/badge/AI_SDK-5-black) ![tech](https://img.shields.io/badge/Node-22-green) ![tech](https://img.shields.io/badge/Three.js-R3F-blue)
 
@@ -55,7 +55,7 @@ npm run preview    # 本地静态预览
 ## 添加新的场馆项目
 
 1. 复制 [`src/data/venues/ningbo-smart-expo-2026.ts`](src/data/venues/ningbo-smart-expo-2026.ts) 为新文件
-2. 按注释填写：展馆矩形（米制坐标，+x 向东 / +z 向南）、路网节点与边、POI（挂靠就近路网节点）、入口、兴趣标签
+2. 按注释填写：展馆矩形（米制坐标，+x 向东 / +z 向南）、路网节点与边、POI（挂靠就近路网节点）、入口、兴趣标签；常年开放场馆可补充 `seasonNote` / `events`（时令与展会活动，AI 规划与页面会自动消费），场地更大时调高 `sceneZoom`
 3. 在 [`src/data/venues/index.ts`](src/data/venues/index.ts) 注册表中加入一行
 
 无需改动任何组件代码；也可以为项目定制 `demo.ts` 里的演示路线。

@@ -15,11 +15,14 @@ export function CameraRig({
   walkerRef,
   hasRoute,
   controlsRef,
+  zoom = 1,
 }: {
   mode: CameraMode;
   walkerRef: React.MutableRefObject<THREE.Vector3>;
   hasRoute: boolean;
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
+  /** 场景视野缩放（project.sceneZoom），俯瞰高度随其放大 */
+  zoom?: number;
 }) {
   const { camera } = useThree();
   const desired = useMemo(() => new THREE.Vector3(), []);
@@ -51,7 +54,8 @@ export function CameraRig({
       camera.lookAt(look);
     } else if (mode === "top") {
       if (controls) controls.enabled = false;
-      camera.position.lerp(TOP_POS, k);
+      desired.set(TOP_POS.x, TOP_POS.y * zoom, TOP_POS.z);
+      camera.position.lerp(desired, k);
       look.set(TOP_TARGET.x, 0, TOP_TARGET.z);
       camera.lookAt(look);
     } else {
