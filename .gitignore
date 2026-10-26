@@ -16,3 +16,6 @@ next-env.d.ts
 # local tool state
 .zcode/
 .mimosa/
+
+# internal docs, never publish
+docs/
