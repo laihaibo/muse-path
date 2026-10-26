@@ -39,7 +39,7 @@ export function LogoMark() {
           <stop offset="100%" stopColor="#a78bfa" />
         </linearGradient>
       </defs>
-      <rect x="1" y="1" width="38" height="38" rx="11" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" />
+      <rect x="1" y="1" width="38" height="38" rx="11" className="logo-frame" />
       <path
         d="M11 29c0-6 4-6 8-8s6-4 6-10"
         fill="none"

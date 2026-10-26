@@ -57,6 +57,12 @@ body {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 10px 30px rgba(2, 6, 18, 0.4);
 }
 
+/* Logo 底框（CSS 属性优先级高于 SVG 表现属性，双主题在此切换） */
+.logo-frame {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 255, 255, 0.22);
+}
+
 /* ---------- 3D 标注（drei Html） ---------- */
 
 .hall-label {
@@ -214,62 +220,62 @@ html.light .placeholder\:text-slate-500::placeholder {
   color: #7d8ca7;
 }
 
-/* 中性面板（白 → 半透明墨蓝） */
+/* 中性面板（白 → 半透明墨蓝，档位需够深才能在浅色面板上分层） */
 html.light .bg-white\/4 {
-  background-color: rgba(16, 27, 48, 0.04);
+  background-color: rgba(16, 27, 48, 0.06);
 }
 html.light .bg-white\/5 {
-  background-color: rgba(16, 27, 48, 0.05);
+  background-color: rgba(16, 27, 48, 0.06);
 }
 html.light .bg-white\/6 {
-  background-color: rgba(16, 27, 48, 0.05);
+  background-color: rgba(16, 27, 48, 0.07);
 }
 html.light .bg-white\/8 {
-  background-color: rgba(16, 27, 48, 0.07);
+  background-color: rgba(16, 27, 48, 0.1);
 }
 html.light .bg-white\/10,
 html.light .focus\:bg-white\/10:focus {
-  background-color: rgba(16, 27, 48, 0.08);
+  background-color: rgba(16, 27, 48, 0.12);
 }
 html.light .bg-white\/12 {
-  background-color: rgba(16, 27, 48, 0.1);
+  background-color: rgba(16, 27, 48, 0.14);
 }
 html.light .bg-white\/15,
 html.light .hover\:bg-white\/15:hover {
-  background-color: rgba(16, 27, 48, 0.12);
+  background-color: rgba(16, 27, 48, 0.18);
 }
 html.light .hover\:bg-white\/10:hover {
-  background-color: rgba(16, 27, 48, 0.08);
+  background-color: rgba(16, 27, 48, 0.12);
 }
 html.light .hover\:bg-white\/12:hover {
-  background-color: rgba(16, 27, 48, 0.1);
+  background-color: rgba(16, 27, 48, 0.14);
 }
 html.light .border-white\/10 {
-  border-color: rgba(16, 27, 48, 0.1);
-}
-html.light .border-white\/12 {
-  border-color: rgba(16, 27, 48, 0.12);
-}
-html.light .border-white\/14 {
   border-color: rgba(16, 27, 48, 0.14);
 }
-html.light .border-white\/15 {
-  border-color: rgba(16, 27, 48, 0.15);
-}
-html.light .border-white\/16 {
+html.light .border-white\/12 {
   border-color: rgba(16, 27, 48, 0.16);
 }
+html.light .border-white\/14 {
+  border-color: rgba(16, 27, 48, 0.18);
+}
+html.light .border-white\/15 {
+  border-color: rgba(16, 27, 48, 0.2);
+}
+html.light .border-white\/16 {
+  border-color: rgba(16, 27, 48, 0.22);
+}
 html.light .ring-white\/10 {
-  --tw-ring-color: rgba(16, 27, 48, 0.1);
+  --tw-ring-color: rgba(16, 27, 48, 0.14);
 }
 html.light .ring-white\/12 {
-  --tw-ring-color: rgba(16, 27, 48, 0.12);
+  --tw-ring-color: rgba(16, 27, 48, 0.16);
 }
 html.light .ring-white\/15 {
-  --tw-ring-color: rgba(16, 27, 48, 0.15);
+  --tw-ring-color: rgba(16, 27, 48, 0.2);
 }
 html.light .ring-white\/16 {
-  --tw-ring-color: rgba(16, 27, 48, 0.16);
+  --tw-ring-color: rgba(16, 27, 48, 0.22);
 }
 html.light .bg-black\/55 {
   background-color: rgba(12, 20, 36, 0.4);
@@ -362,25 +368,32 @@ html.light .border-emerald-400\/30 {
 
 /* 玻璃拟态（保留基类的 backdrop-filter，仅替换表面与阴影） */
 html.light .glass {
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.62) 42%, rgba(224, 234, 250, 0.7));
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75) 42%, rgba(226, 236, 250, 0.8));
+  border: 1px solid rgba(16, 27, 48, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 24px 70px rgba(15, 23, 42, 0.12);
+    0 2px 8px rgba(15, 23, 42, 0.08),
+    0 24px 70px rgba(15, 23, 42, 0.16);
 }
 html.light .glass-strong {
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(238, 244, 253, 0.96));
-  border: 1px solid rgba(16, 27, 48, 0.08);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.96), rgba(240, 246, 253, 0.97));
+  border: 1px solid rgba(16, 27, 48, 0.14);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 30px 90px rgba(15, 23, 42, 0.16);
+    0 2px 10px rgba(15, 23, 42, 0.1),
+    0 30px 90px rgba(15, 23, 42, 0.18);
 }
 html.light .glass-chip {
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.6));
-  border: 1px solid rgba(16, 27, 48, 0.1);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72));
+  border: 1px solid rgba(16, 27, 48, 0.14);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 10px 30px rgba(15, 23, 42, 0.08);
+    0 2px 6px rgba(15, 23, 42, 0.08),
+    0 10px 30px rgba(15, 23, 42, 0.14);
+}
+html.light .logo-frame {
+  fill: rgba(16, 27, 48, 0.06);
+  stroke: rgba(16, 27, 48, 0.28);
 }
 
 /* 3D 标注（场景在日间为浅色，标注随之切换） */

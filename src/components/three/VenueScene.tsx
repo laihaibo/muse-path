@@ -29,9 +29,9 @@ const SCENE = {
   },
   light: {
     bg: "#e3ebf7",
-    ground: "#ccd7e7",
-    cell: "#b3c2d8",
-    section: "#93a7c5",
+    ground: "#b4c3d9",
+    cell: "#9cadca",
+    section: "#7e93b8",
     hemi: ["#ffffff", "#b9c8dd", 0.75] as const,
     ambient: 0.8,
     stars: false,
@@ -49,6 +49,7 @@ function EntranceMarker({
   pad: string;
   padOpacity: number;
 }) {
+  const dark = useResolvedTheme() === "dark";
   return (
     <group position={[entrance.x, 0, entrance.z]}>
       <mesh rotation-x={-Math.PI / 2} position-y={0.45}>
@@ -57,7 +58,12 @@ function EntranceMarker({
       </mesh>
       <mesh rotation={[0, Math.PI / 4, 0]} position-y={2.2}>
         <coneGeometry args={[1.6, 3.4, 4]} />
-        <meshStandardMaterial color="#94a3b8" emissive="#7dd3fc" emissiveIntensity={0.25} roughness={0.4} />
+        <meshStandardMaterial
+          color={dark ? "#94a3b8" : "#64748b"}
+          emissive={dark ? "#7dd3fc" : "#0284c7"}
+          emissiveIntensity={dark ? 0.25 : 0.4}
+          roughness={0.4}
+        />
       </mesh>
       <Html center position={[0, 6, 0]} distanceFactor={200} zIndexRange={[12, 0]}>
         <div className="entrance-label">{entrance.name}</div>
@@ -111,7 +117,7 @@ function SceneContents({ project, route }: { project: VenueProject; route: Compu
       {/* 南北轴通道光带 */}
       <mesh position={[0, 0.05, -15]}>
         <boxGeometry args={[34, 0.1, 190]} />
-        <meshBasicMaterial color="#14b8a6" transparent opacity={0.1} depthWrite={false} />
+        <meshBasicMaterial color="#14b8a6" transparent opacity={theme === "dark" ? 0.1 : 0.18} depthWrite={false} />
       </mesh>
 
       {project.venue.halls.map((h) => (
