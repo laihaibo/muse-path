@@ -159,6 +159,12 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "musepath-store-v1",
+      version: 1,
+      // v1：默认场馆切换后，旧持久化的场馆选择作废（API 配置与路线保留）
+      migrate: (persisted) => ({
+        ...(persisted as Pick<AppState, "selectedProjectId" | "aiConfig" | "plans" | "entryByProject">),
+        selectedProjectId: defaultProjectId,
+      }),
       skipHydration: true,
       partialize: (s) => ({
         selectedProjectId: s.selectedProjectId,
